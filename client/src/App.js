@@ -1,19 +1,23 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import AddUser from "./pages/AddUser";
-import UserTable from "./pages/UserTable";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import ManageUsers from "./components/ManageUsers";
+import UserForm from "./components/UserForm";
+import AddUser from "./components/AddUser";
 
-const App = () => {
+function App() {
     return (
         <Router>
-            <Routes>
-                <Route path="/" element={<LoginPage />} />
-                <Route path="/add" element={<AddUser />} />
-                <Route path="/users" element={<UserTable />} />
-            </Routes>
+            <Switch>
+                <Route path="/" exact component={Login} />
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/users" component={ManageUsers} />
+                <Route path="/add-user" component={AddUser} />
+                <Route path="/edit-user/:id" component={UserForm} />
+            </Switch>
         </Router>
     );
-};
+}
 
-export default App;
+export default App

@@ -1,29 +1,26 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
+const connectDB = require("./config/db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 
 const app = express();
+
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// MongoDB connection
-mongoose.connect("mongodb://localhost:27017/mern_users", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+// Connect to MongoDB
+connectDB();
 
 // Routes
-app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 const PORT = 5000;
-app.listen(PORT, () => {
-    console.log(`Backend running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Backend running on http://localhost:${PORT}`));
 
 
 // const express = require("express");
