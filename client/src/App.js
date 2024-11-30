@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import AddUser from "./pages/AddUser";
+import UserTable from "./pages/UserTable";
 
-function App() {
-  const [message, setMessage] = useState("");
+const App = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/add" element={<AddUser />} />
+                <Route path="/users" element={<UserTable />} />
+            </Routes>
+        </Router>
+    );
+};
 
-  useEffect(() => {
-    fetch("http://localhost:8000/message")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  }, []);
-
-  return (
-    <div className="App">
-      <h1>{message}</h1>
-    </div>
-  );
-}
-
-export default App
+export default App;
